@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar">
+<!-- <mat-toolbar class="toolbar">
   <span>E-commerce</span>
   <a routerLink="login">Login</a>
   <a routerLink="registration">Register</a>
@@ -6,5 +6,17 @@
   <a routerLink="create-order">Create order</a>
   <a routerLink="orders">Orders</a>
   <a routerLink="products">Products</a>
-</mat-toolbar>
-<router-outlet></router-outlet>
+</mat-toolbar> -->
+<!-- <router-outlet></router-outlet> -->
+
+<div class="container-fluid">
+  <app-toolbar [inputSideNav]="sideNav"></app-toolbar>
+  <mat-sidenav-container>
+    <mat-sidenav #sideNav mode="side" opened>
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

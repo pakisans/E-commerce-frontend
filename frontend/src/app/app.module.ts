@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,6 +13,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSliderModule} from '@angular/material/slider';
+
+
 import { FormBuilder } from '@angular/forms';
 
 
@@ -25,6 +29,8 @@ import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
 import { CreateOrderComponent } from './create-order/create-order.component';
 import { OrdersComponent } from './orders/orders.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 
@@ -38,7 +44,9 @@ import { OrdersComponent } from './orders/orders.component';
     ProductsComponent,
     CartComponent,
     CreateOrderComponent,
-    OrdersComponent
+    OrdersComponent,
+    SideNavComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +63,14 @@ import { OrdersComponent } from './orders/orders.component';
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSidenavModule,
+    MatSliderModule
   ],
   providers: [FormBuilder],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }
