@@ -5,7 +5,10 @@
     justify-content: center;
 }
 
-
+.center{
+    display: flex;
+    justify-content: center;
+}
 
 form .form-row {
     display: block;
@@ -14,3 +17,8 @@ form .form-row {
 .form-container {
     width: 50%;
 }
+
+/* :host {
+    background: blue;
+    display: block;
+} */

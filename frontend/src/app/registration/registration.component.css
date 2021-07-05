@@ -5,6 +5,11 @@
     justify-content: center;
 }
 
+.center{
+    display: flex;
+    justify-content: center;
+}
+
 
 
 form .form-row {
@@ -14,3 +19,4 @@ form .form-row {
 .form-container {
     width: 50%;
 }
+
