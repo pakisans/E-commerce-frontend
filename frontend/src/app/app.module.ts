@@ -32,6 +32,8 @@ import { CreateOrderComponent } from './create-order/create-order.component';
 import { OrdersComponent } from './orders/orders.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -47,11 +49,13 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     CreateOrderComponent,
     OrdersComponent,
     SideNavComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ProfileInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatInputModule,
