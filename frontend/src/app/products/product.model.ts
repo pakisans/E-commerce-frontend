@@ -4,5 +4,6 @@ export class Product{
     price:number;
     description:string;
     image:string;
+    deleted:boolean;
 
 }

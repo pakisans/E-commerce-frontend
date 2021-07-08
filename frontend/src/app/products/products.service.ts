@@ -8,6 +8,7 @@ import { Product } from './product.model';
 })
 export class ProductsService {
   private baseUrl = "http://localhost:8080/products"
+  private cartUrl = "http://localhost:8080/carts"
 
   constructor(private http: HttpClient) { }
 
@@ -15,5 +16,8 @@ export class ProductsService {
   getProducts():Observable<Product[]>{
     return this.http.get<Product[]>(`${this.baseUrl}`);
 
+  }
+  addToCart(payload) {
+    return this.http.post(`${this.cartUrl}`, payload);
   }
 }
