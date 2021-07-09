@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { FormGroup,FormBuilder,Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OauthService } from '../services/oauth.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     private fb : FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
+    public oauth:OauthService
     // private authService: AuthService
   ) { this.form = this.fb.group({
     email: ['', Validators.email],
@@ -34,8 +36,22 @@ export class LoginComponent implements OnInit {
      
         const email = this.form.get('email')?.value;
         const password = this.form.get('password')?.value;
+
+        var data:FormData = new FormData();
+        data.append("username", email);
+        data.append("password",password);
+        data.append("client_secret","client_secret");
+        data.append("client_id","client_id");
+        data.append("grant_type","password");
+        this.oauth.login(data).subscribe((response: any) => {
+
+          localStorage.setItem('token', response.access_token);
+        })
        
-  }
+    }
+
+    
+    
 
   }
 

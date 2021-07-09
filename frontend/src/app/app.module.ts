@@ -15,8 +15,7 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSliderModule} from '@angular/material/slider';
-
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { FormBuilder } from '@angular/forms';
 
@@ -70,7 +69,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatOptionModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
-    MatSliderModule
+    MatSliderModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [FormBuilder],
   bootstrap: [AppComponent],
