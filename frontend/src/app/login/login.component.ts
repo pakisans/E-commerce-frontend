@@ -46,7 +46,10 @@ export class LoginComponent implements OnInit {
         this.oauth.login(data).subscribe((response: any) => {
 
           localStorage.setItem('token', response.access_token);
+          // localStorage.setItem('currentUser', data);
         })
+
+
        
     }
 
