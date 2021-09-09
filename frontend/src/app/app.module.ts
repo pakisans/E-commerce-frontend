@@ -27,12 +27,12 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductsComponent } from './products/products.component';
 import { CartComponent } from './cart/cart.component';
-import { CreateOrderComponent } from './create-order/create-order.component';
 import { OrdersComponent } from './orders/orders.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
 
@@ -45,11 +45,11 @@ import { HttpClientModule } from '@angular/common/http';
     RegistrationComponent,
     ProductsComponent,
     CartComponent,
-    CreateOrderComponent,
     OrdersComponent,
     SideNavComponent,
     ToolbarComponent,
-    ProfileInfoComponent
+    ProfileInfoComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
