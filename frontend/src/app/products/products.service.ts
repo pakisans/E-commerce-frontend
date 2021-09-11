@@ -14,7 +14,7 @@ export class ProductsService {
 
 
   getProducts():Observable<Product[]>{
-    return this.http.get<Product[]>(`${this.baseUrl}`);
+    return this.http.get<Product[]>(this.baseUrl + '/getProducts');
 
   }
   addToCart(payload) {
