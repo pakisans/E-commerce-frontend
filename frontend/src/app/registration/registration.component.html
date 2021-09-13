@@ -2,7 +2,7 @@
     <mat-card class="form-container">
         <mat-card-content>
             <h1 class="center">Registration</h1>
-            <form>
+            <form  (ngSubmit) = "onSubmit()" [formGroup] = "form">
                 <mat-form-field class="form-row">
                     <mat-label class="fas fa-mail-bulk">Email</mat-label>
                     <input matInput type="email" placeholder="Email" formControlName="email" required>
@@ -11,7 +11,8 @@
     
                 <mat-form-field class="form-row">
                     <mat-label class="fas fa-lock">Password</mat-label>
-                    <input matInput type="password" placeholder="Password" formControlName="password" required>
+                    <input matInput type="password" placeholder="Password"
+                     formControlName="password" required>
     
                 </mat-form-field>
 
@@ -27,7 +28,7 @@
     
                 </mat-form-field>
     
-                <button mat-raised-button color="primary">Register</button>
+                <button mat-raised-button color="primary" type="submit" [disabled] = "!form.valid">Register</button>
 
                 
             </form>

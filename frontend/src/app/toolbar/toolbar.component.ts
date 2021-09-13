@@ -15,4 +15,8 @@ export class ToolbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(): void{
+    localStorage.removeItem('token');
+  }
+
 }

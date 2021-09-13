@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { RegistrationService } from './registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -12,7 +14,10 @@ export class RegistrationComponent implements OnInit {
   public registerInvalid = false;
   private formSubmitAttempt = false;
 
-  constructor( private fb : FormBuilder) {
+
+  constructor( private fb : FormBuilder,
+               private router: Router,
+               private registrationService: RegistrationService) {
     this.form = this.fb.group({
     email: ['', Validators.email],
     password: ['', Validators.required],
@@ -32,6 +37,16 @@ export class RegistrationComponent implements OnInit {
         const password = this.form.get('password')?.value;
         const firstName = this.form.get('firstName')?.value;
         const lastName = this.form.get('lastName')?.value;
+
+        const jsonRegister = {
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName
+        }
+
+        this.registrationService.register(jsonRegister).subscribe(res => console.log(res));
+        this.router.navigate([''])
        
   }
 

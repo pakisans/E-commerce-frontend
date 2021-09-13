@@ -11,7 +11,7 @@
                     </button>
                     <mat-menu #menu="matMenu">
                         <button mat-menu-item>
-                            <mat-icon>exit_to_app</mat-icon>
+                            <mat-icon (click) = "logout()">exit_to_app</mat-icon>
                             Logout
                             <mat-icon>perm_contact_calendar</mat-icon>
                             Profile
