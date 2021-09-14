@@ -1,54 +1,4 @@
 <div class="page-container">
-    <!-- 
-    <div class="apanel-div" >
-        <form (ngSubmit) = "onSubmitCategory()" [formGroup] = "formCategory">
-            <mat-card class="apanel-card">
-            <mat-card-title>New Category</mat-card-title>
-            <mat-form-field class="account-form">
-                <input matInput type="text" name="category" placeholder="Category" formControlName="category">
-                <mat-error>Category name</mat-error>
-            </mat-form-field>
-            </mat-card>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new category</button>
-    </form>      
-    </div>
-
-    <div class="apanel-div" >
-        <form (ngSubmit) = "onSubmitProduct()" [formGroup] = "formProduct">
-            <mat-card class="apanel-card">
-            <mat-card-title>New product</mat-card-title>
-            <mat-form-field class="product-form">
-                <input matInput type="text" name="name" placeholder="Name" formControlName="name">
-                <mat-error>Name</mat-error>
-            </mat-form-field><br>
-            <mat-form-field class="product-form">
-                <input matInput type="number" name="price" placeholder="Price" formControlName="price">
-                <mat-error>Price</mat-error>
-            </mat-form-field><br>
-            <mat-form-field class="product-form">
-                <input matInput type="text" name="description" placeholder="Description" formControlName="description">
-                <mat-error>Description</mat-error>
-            </mat-form-field><br>
-            <mat-form-field class="product-form">
-                <input matInput type="text" name="image" placeholder="Image(link url)" formControlName="image"
-                >
-                <mat-error>Image</mat-error>
-            </mat-form-field><br>
-            <form>
-                <mat-form-field appearance="fill">
-                <mat-label>Category</mat-label>
-                <mat-select [(ngModel)]="selectedValue" name="category">
-                    <mat-option *ngFor="let category of categories" [value]="category.value">
-                    {{category.viewValue}}
-                    </mat-option>
-                </mat-select>
-                </mat-form-field>
-                <p> Selected category: {{selectedValue}} </p>
-            </form> 
-            </mat-card>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new product</button>
-    </form>      
-    </div> -->
     <!---------------------------------------------------User managment---------------------------------------------------------------->
     <nav class="navbar navbar-light bg-primary">
         <div class="container-fluid">
@@ -78,7 +28,7 @@
                 <td>{{user.lastName}}</td>
                 <td>{{user.role}}</td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <button (click)="deleteUser(row)" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -127,7 +77,7 @@
             </form>      
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
@@ -138,7 +88,7 @@
     <div class="container-fluid">
         <h2>Manage categories</h2>
         <div class="d-flex">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalCategory">Add category</button>
+            <button (click)="clickAdd()" class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModalCategory">Add category</button>
         </div>
     </div>
 </nav>
@@ -156,7 +106,7 @@
             <td>{{category.id}}</td>
             <td>{{category.name}}</td>
             <td>
-                <button class="btn btn-warning">Edit</button>
+                <button (click)="onEdit(category)" data-bs-toggle="modal" data-bs-target="#exampleModalCategory" class="btn btn-warning">Edit</button>
                 <button class="btn btn-danger">Delete</button>
             </td>
         </tr>
@@ -180,11 +130,12 @@
                 <mat-error>Category name</mat-error>
             </mat-form-field>
             </mat-card>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new category</button>
+            <button *ngIf="showAdd" mat-raised-button type="submit" class="btn btn-danger pull-right">Add new category</button>
         </form>    
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button id="cancel1" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" *ngIf="showUpdate" (click)="updateCategory()" class="btn btn-primary">Update</button>
     </div>
   </div>
 </div>
@@ -195,7 +146,7 @@
     <div class="container-fluid">
         <h2>Manage products</h2>
         <div class="d-flex">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalProduct">Add new product</button>
+            <button (click)="clickAdd()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalProduct">Add new product</button>
         </div>
     </div>
 </nav>
@@ -220,7 +171,7 @@
             <td>{{product.price}}</td>
             <td>{{product.id_category}}</td>
             <td>
-                <button class="btn btn-warning">Edit</button>
+                <button (click)="onEditProduct(product)" data-bs-toggle="modal" data-bs-target="#exampleModalProduct" class="btn btn-warning">Edit</button>
                 <button class="btn btn-danger">Delete</button>
             </td>
         </tr>
@@ -268,16 +219,15 @@
                 <p> Selected category: {{selectedValue}} </p>
             </form>  -->
             </mat-card>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new product</button>
+            <button *ngIf="showAdd" mat-raised-button type="submit" class="btn btn-danger pull-right">Add new product</button>
     </form>    
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button id="cancel2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" *ngIf="showUpdate" (click)="updateProduct()" class="btn btn-primary">Update</button>
     </div>
   </div>
 </div>
 </div>
-<!----------------------------------------------------------------------------------------------------------------------------->
-
-    
+<!----------------------------------------------------------------------------------------------------------------------------->  
 </div>

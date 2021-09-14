@@ -15,6 +15,8 @@ export class AdminPanelComponent implements OnInit {
   productsData !: any;
   categoriesData !: any;
   usersData !: any;
+  showAdd !: boolean;
+  showUpdate !: boolean;
 
   roles: string[] = ['ADMIN', 'USER'];
   selectedRole = '';
@@ -48,10 +50,20 @@ export class AdminPanelComponent implements OnInit {
     this.getAllUsers();
   }
 
+  clickAdd(){
+    this.showAdd = true;
+    this.showUpdate = false;
+  }
+
   onSubmitCategory() {
     if(this.formCategory.valid) {
       const category = this.formCategory.get('category')?.value;
       this.adminService.addCategory(category).subscribe(res => console.log(res))
+      alert("Category added successfully");
+      let ref = document.getElementById('cancel1')
+      ref?.click();
+      this.formCategory.reset();
+      this.getAllCategories();
     }
   }
 
@@ -70,9 +82,15 @@ export class AdminPanelComponent implements OnInit {
         password: password,
         role: role
       }
-      
+
 
       this.adminService.addUser(userJson).subscribe(res => console.log(res))
+      alert("User added successfully");
+      let ref = document.getElementById('cancel')
+      ref?.click();
+      this.formUser.reset();
+      this.getAllUsers();
+
     }
 
   }
@@ -92,29 +110,50 @@ export class AdminPanelComponent implements OnInit {
       }
       
       this.adminService.addProduct(productJson).subscribe(res => console.log(res))
+      alert("Product added successfully")
+      let ref = document.getElementById('cancel2');
+      ref?.click();
+      this.formProduct.reset();
+      this.getAllProducts();
     }
 
   }
 
   getAllProducts(){
-    this.adminService.getProducts()
-    .subscribe(res=>{
-      this.productsData = res;
-    })
+    this.adminService.getProducts().subscribe(res=>{this.productsData = res;})
   }
 
   getAllCategories(){
-    this.adminService.getCategories()
-    .subscribe(res=>{
-      this.categoriesData = res;
-    })
+    this.adminService.getCategories().subscribe(res=>{this.categoriesData = res;})
   }
 
   getAllUsers(){
-    this.adminService.getUsers()
-    .subscribe(res=>{
-      this.usersData = res;
-    })
+    this.adminService.getUsers().subscribe(res=>{this.usersData = res;})
+  }
+
+  deleteUser(row : any){
+    this.adminService.deleteUser(row.id).subscribe(res=>{alert("User deleted");
+    this.getAllUsers()})
+  }
+
+  onEdit(category : any){
+    this.showAdd = false;
+    this.showUpdate = true;
+    this.formCategory.controls['name'].setValue(category.name);
+  }
+
+  onEditProduct(product : any){
+    this.showAdd = false;
+    this.showUpdate = true;
+  }
+
+
+  updateCategory(){
+
+  }
+
+  updateProduct(){
+
   }
 
 }

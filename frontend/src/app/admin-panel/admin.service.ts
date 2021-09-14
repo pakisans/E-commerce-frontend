@@ -37,4 +37,7 @@ export class AdminService {
   getUsers():Observable<User[]>{
     return this.httpClient.get<User[]>(this.BACKEND_BASE + '/users/')
   }
+  deleteUser(id: number) {
+    return this.httpClient.delete<any>(this.BACKEND_BASE+'/users/delete/'+id);
+  }
 }
