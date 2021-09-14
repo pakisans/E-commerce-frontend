@@ -1,82 +1,85 @@
 <div class="page-container">
     <div class="apanel-div" >
-        <mat-card class="apanel-card">
-        <mat-card-title style="text-align: center;">Admin panel</mat-card-title>
-        <mat-card-title>New user</mat-card-title>
-        <mat-form-field class="account-form">
-            <input matInput type="text" name="email" placeholder="Email" formControlName="email">
-            <mat-error>Username</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="account-form">
-            <input matInput type="firstName" name="firstName" placeholder="Firstname" formControlName="firstName">
-            <mat-error>Firstname</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="account-form">
-            <input matInput type="lastName" name="lastName" placeholder="Lastname" formControlName="lastName">
-            <mat-error>Lastname</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="account-form">
-            <input matInput type="password" name="password" placeholder="Password" formControlName="password"
-            >
-            <mat-error>password</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="account-form">
-            <input matInput type="password" name="confirmPassword" placeholder="Confirm password"
-            formControlName="confirmPassword">
-            <mat-error>confirmPass</mat-error>
-        </mat-form-field><br>
-        <mat-form-field appearance="fill">
-            <mat-label>Choose user role</mat-label>
-            <mat-select >
-              <mat-option value="option1">Admin</mat-option>
-              <mat-option value="option2">Customer</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-card>
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new user</button>      
+        <form (ngSubmit) = "onSubmitUser()" [formGroup] = "formUser">
+            <mat-card class="apanel-card">
+                <mat-card-title style="text-align: center;">Admin panel</mat-card-title>
+                <mat-card-title>New user</mat-card-title>
+                <mat-form-field class="account-form">
+                    <input matInput type="text" name="email" placeholder="Email" formControlName="email">
+                    <mat-error>Username</mat-error>
+                </mat-form-field><br>
+                <mat-form-field class="account-form">
+                    <input matInput type="firstName" name="firstName" placeholder="Firstname" formControlName="firstName">
+                    <mat-error>Firstname</mat-error>
+                </mat-form-field><br>
+                <mat-form-field class="account-form">
+                    <input matInput type="lastName" name="lastName" placeholder="Lastname" formControlName="lastName">
+                    <mat-error>Lastname</mat-error>
+                </mat-form-field><br>
+                <mat-form-field class="account-form">
+                    <input matInput type="password" name="password" placeholder="Password" formControlName="password"
+                    >
+                    <mat-error>password</mat-error>
+                </mat-form-field><br>
+                <mat-form-field appearance="fill">
+                    <mat-label>Choose user role</mat-label>
+                    <mat-select name = "role" formControlName = "role">
+                      <mat-option value="ADMIN">Admin</mat-option>
+                      <mat-option value="USER">Customer</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-card>
+                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new user</button>  
+        </form>    
     </div>
+
     <div class="apanel-div" >
-        <mat-card class="apanel-card">
-        <mat-card-title>New Category</mat-card-title>
-        <mat-form-field class="account-form">
-            <input matInput type="text" name="category" placeholder="Category" formControlName="category">
-            <mat-error>Category name</mat-error>
-        </mat-form-field>
-        </mat-card>
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new category</button>      
-    </div>
-    <div class="apanel-div" >
-        <mat-card class="apanel-card">
-        <mat-card-title>New product</mat-card-title>
-        <mat-form-field class="product-form">
-            <input matInput type="text" name="name" placeholder="Name" formControlName="name">
-            <mat-error>Name</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="product-form">
-            <input matInput type="number" name="price" placeholder="Price" formControlName="price">
-            <mat-error>Price</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="product-form">
-            <input matInput type="text" name="description" placeholder="Description" formControlName="description">
-            <mat-error>Description</mat-error>
-        </mat-form-field><br>
-        <mat-form-field class="product-form">
-            <input matInput type="text" name="image" placeholder="Image(link url)" formControlName="image"
-            >
-            <mat-error>Image</mat-error>
-        </mat-form-field><br>
-        <!-- <form>
-            <mat-form-field appearance="fill">
-              <mat-label>Category</mat-label>
-              <mat-select [(ngModel)]="selectedValue" name="category">
-                <mat-option *ngFor="let category of categories" [value]="category.value">
-                  {{category.viewValue}}
-                </mat-option>
-              </mat-select>
+        <form (ngSubmit) = "onSubmitCategory()" [formGroup] = "formCategory">
+            <mat-card class="apanel-card">
+            <mat-card-title>New Category</mat-card-title>
+            <mat-form-field class="account-form">
+                <input matInput type="text" name="category" placeholder="Category" formControlName="category">
+                <mat-error>Category name</mat-error>
             </mat-form-field>
-            <p> Selected category: {{selectedValue}} </p>
-          </form> -->
-        </mat-card>
-        <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new product</button>      
+            </mat-card>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new category</button>
+    </form>      
+    </div>
+
+    <div class="apanel-div" >
+        <form (ngSubmit) = "onSubmitProduct()" [formGroup] = "formProduct">
+            <mat-card class="apanel-card">
+            <mat-card-title>New product</mat-card-title>
+            <mat-form-field class="product-form">
+                <input matInput type="text" name="name" placeholder="Name" formControlName="name">
+                <mat-error>Name</mat-error>
+            </mat-form-field><br>
+            <mat-form-field class="product-form">
+                <input matInput type="number" name="price" placeholder="Price" formControlName="price">
+                <mat-error>Price</mat-error>
+            </mat-form-field><br>
+            <mat-form-field class="product-form">
+                <input matInput type="text" name="description" placeholder="Description" formControlName="description">
+                <mat-error>Description</mat-error>
+            </mat-form-field><br>
+            <mat-form-field class="product-form">
+                <input matInput type="text" name="image" placeholder="Image(link url)" formControlName="image"
+                >
+                <mat-error>Image</mat-error>
+            </mat-form-field><br>
+            <!-- <form>
+                <mat-form-field appearance="fill">
+                <mat-label>Category</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="category">
+                    <mat-option *ngFor="let category of categories" [value]="category.value">
+                    {{category.viewValue}}
+                    </mat-option>
+                </mat-select>
+                </mat-form-field>
+                <p> Selected category: {{selectedValue}} </p>
+            </form> -->
+            </mat-card>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new product</button>
+    </form>      
     </div>
 </div>
