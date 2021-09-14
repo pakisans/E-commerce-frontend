@@ -5,5 +5,6 @@ export class Product{
     description:string;
     image:string;
     deleted:boolean;
+    id_category:number;
 
 }

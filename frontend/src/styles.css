@@ -10,3 +10,11 @@ body{
     text-align: left;
     background-color: #1e1e2f;
 }
+
+.modal-backdrop {
+    /* bug fix - no overlay */    
+    display: none;    
+}
+.modal {
+    margin-top:2%;
+}

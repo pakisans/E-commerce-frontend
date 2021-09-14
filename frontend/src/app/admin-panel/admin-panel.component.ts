@@ -12,6 +12,9 @@ export class AdminPanelComponent implements OnInit {
   formCategory: FormGroup;
   formUser: FormGroup;
   formProduct: FormGroup;
+  productsData !: any;
+  categoriesData !: any;
+  usersData !: any;
 
   roles: string[] = ['ADMIN', 'USER'];
   selectedRole = '';
@@ -40,6 +43,9 @@ export class AdminPanelComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.getAllProducts();
+    this.getAllCategories();
+    this.getAllUsers();
   }
 
   onSubmitCategory() {
@@ -88,6 +94,27 @@ export class AdminPanelComponent implements OnInit {
       this.adminService.addProduct(productJson).subscribe(res => console.log(res))
     }
 
+  }
+
+  getAllProducts(){
+    this.adminService.getProducts()
+    .subscribe(res=>{
+      this.productsData = res;
+    })
+  }
+
+  getAllCategories(){
+    this.adminService.getCategories()
+    .subscribe(res=>{
+      this.categoriesData = res;
+    })
+  }
+
+  getAllUsers(){
+    this.adminService.getUsers()
+    .subscribe(res=>{
+      this.usersData = res;
+    })
   }
 
 }
