@@ -24,7 +24,8 @@ export class AdminPanelComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private adminService: AdminService) {
 
     this.formCategory = formBuilder.group({
-      category : ['', Validators.required]
+      category : ['', Validators.required],
+      idCategory: ['']
     })
     
     this.formUser = formBuilder.group({
@@ -39,7 +40,8 @@ export class AdminPanelComponent implements OnInit {
       name: ['', Validators.required],
       price: ['', Validators.required],
       description: ['', Validators.required],
-      image: ['', Validators.required]
+      image: ['', Validators.required],
+      idProduct: ['']
     })
 
    }
@@ -131,29 +133,58 @@ export class AdminPanelComponent implements OnInit {
     this.adminService.getUsers().subscribe(res=>{this.usersData = res;})
   }
 
-  deleteUser(row : any){
-    this.adminService.deleteUser(row.id).subscribe(res=>{alert("User deleted");
-    this.getAllUsers()})
+  deleteUser(user : any){
+    this.adminService.deleteUser(user.id).subscribe(res=>{alert("User deleted");
+    this.getAllUsers()
+  })
   }
 
   onEdit(category : any){
     this.showAdd = false;
     this.showUpdate = true;
-    this.formCategory.controls['name'].setValue(category.name);
+
+    this.formCategory.controls['category'].setValue(category.name);
+    this.formCategory.controls['idCategory'].setValue(category.id);
+
   }
 
   onEditProduct(product : any){
     this.showAdd = false;
     this.showUpdate = true;
+
+
+    this.formProduct.controls['name'].setValue(product.name);
+    this.formProduct.controls['price'].setValue(product.price);
+    this.formProduct.controls['description'].setValue(product.description);
+    this.formProduct.controls['image'].setValue(product.image);
+    this.formProduct.controls['idProduct'].setValue(product.id);
   }
 
 
   updateCategory(){
+    const categoryName = this.formCategory.get('category')?.value;
+    const categoryId = this.formCategory.get('idCategory')?.value;
+    this.adminService.updateCategory(categoryId, categoryName).subscribe(res => console.log(res));
+  }
 
+  onDeleteCategory(category: any) {
+    this.adminService.deleteCategory(category.id).subscribe()
   }
 
   updateProduct(){
+    const productId = this.formProduct.get('idProduct')?.value;
+    const productJson = {
+      name: this.formProduct.get('name')?.value,
+      price: this.formProduct.get('price')?.value,
+      description: this.formProduct.get('description')?.value,
+      image: this.formProduct.get('image')?.value
+    }
 
+    this.adminService.updateProduct(productId, productJson).subscribe(res => console.log(res))
+  }
+
+  deleteProduct(product: any) {
+    this.adminService.deleteProduct(product.id).subscribe();
   }
 
 }

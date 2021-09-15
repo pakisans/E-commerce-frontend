@@ -28,7 +28,7 @@
                 <td>{{user.lastName}}</td>
                 <td>{{user.role}}</td>
                 <td>
-                    <button (click)="deleteUser(row)" class="btn btn-danger">Delete</button>
+                    <button (click)="deleteUser(user)" class="btn btn-danger">Delete</button>
                 </td>
             </tr>
         </tbody>
@@ -107,7 +107,7 @@
             <td>{{category.name}}</td>
             <td>
                 <button (click)="onEdit(category)" data-bs-toggle="modal" data-bs-target="#exampleModalCategory" class="btn btn-warning">Edit</button>
-                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-danger" (click) = "onDeleteCategory(category)">Delete</button>
             </td>
         </tr>
     </tbody>
@@ -124,7 +124,11 @@
     <div class="modal-body">
         <form (ngSubmit) = "onSubmitCategory()" [formGroup] = "formCategory">
             <mat-card class="apanel-card">
-            <mat-card-title>New Category</mat-card-title>
+            <mat-card-title *ngIf="showAdd">New Category</mat-card-title>
+            <mat-card-title *ngIf="showUpdate">Update Category</mat-card-title>
+            <div>
+                <mat-form-label formControlName = "idCategory"></mat-form-label>
+            </div>
             <mat-form-field class="account-form">
                 <input matInput type="text" name="category" placeholder="Category" formControlName="category">
                 <mat-error>Category name</mat-error>
@@ -172,7 +176,7 @@
             <td>{{product.id_category}}</td>
             <td>
                 <button (click)="onEditProduct(product)" data-bs-toggle="modal" data-bs-target="#exampleModalProduct" class="btn btn-warning">Edit</button>
-                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-danger" (click) = "deleteProduct(product)">Delete</button>
             </td>
         </tr>
     </tbody>
@@ -189,7 +193,9 @@
     <div class="modal-body">
         <form (ngSubmit) = "onSubmitProduct()" [formGroup] = "formProduct">
             <mat-card class="apanel-card">
-            <mat-card-title>New product</mat-card-title>
+            <mat-card-title *ngIf = "showAdd">New product</mat-card-title>
+            <mat-card-title *ngIf = "showUpdate">Update product</mat-card-title>
+            <mat-form-label formControlName = "idProduct"></mat-form-label>
             <mat-form-field class="product-form">
                 <input matInput type="text" name="name" placeholder="Name" formControlName="name">
                 <mat-error>Name</mat-error>
