@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './products.service';
 import { Product } from './product.model';
+import { Category } from './category.model';
 
 
 
@@ -16,6 +17,9 @@ export class ProductsComponent implements OnInit {
   productsRecived:Array<Product>
   cartProducts:any;
 
+  allCategories: Array<any> = [];
+  selectedCategoryId: number = 0;
+
   constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {
@@ -28,6 +32,27 @@ export class ProductsComponent implements OnInit {
       this.cartProducts = JSON.parse(localData);
     } else {
       this.cartProducts = [];
+    }
+
+    this.productService.getCategories().subscribe(res => {
+      console.log(res)
+      this.allCategories = res;
+    });
+    console.log(this.allCategories)
+  }
+
+  searchProducts() {
+    console.log(this.selectedCategoryId)
+    if(this.selectedCategoryId == 0) {
+      this.productService.getProducts().subscribe((data: Product[]) => {
+        console.log(data)
+        this.products = data;
+      })
+    } else {
+      this.productService.getProductsByCategory(this.selectedCategoryId).subscribe(res => {
+        console.log(res)
+        this.products = res;
+      })
     }
   }
 

@@ -1,10 +1,13 @@
 <div class="page-container">
 
   <div class="box">
-    <i class="fa fa-search" aria-hidden="true"></i>
-    <input type="text" name="">
+    <mat-select name = "categoryId" [(ngModel)] = "selectedCategoryId" (selectionChange) = "searchProducts()">
+      <mat-option value = 0>Any</mat-option>
+      <mat-option *ngFor = "let cat of allCategories" value= "{{cat.id}}">{{cat.name}}</mat-option>
+    </mat-select>
   </div>
    
+
   <div class="content" *ngFor="let product of products">
     <mat-card class="mat-elevation-z4">
       <mat-card-header>
