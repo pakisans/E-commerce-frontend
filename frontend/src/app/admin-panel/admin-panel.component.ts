@@ -41,7 +41,8 @@ export class AdminPanelComponent implements OnInit {
       price: ['', Validators.required],
       description: ['', Validators.required],
       image: ['', Validators.required],
-      idProduct: ['']
+      idProduct: [''],
+      categoryId: ['', Validators.required]
     })
 
    }
@@ -103,12 +104,14 @@ export class AdminPanelComponent implements OnInit {
       const price = this.formProduct.get('price')?.value;
       const description = this.formProduct.get('description')?.value;
       const image = this.formProduct.get('image')?.value;
+      const categoryId = this.formProduct.get('categoryId')?.value;
 
       const productJson = {
         name: name,
         price: Number(price),
         description: description,
-        image: image
+        image: image,
+        categoryId: categoryId
       }
       
       this.adminService.addProduct(productJson).subscribe(res => console.log(res))

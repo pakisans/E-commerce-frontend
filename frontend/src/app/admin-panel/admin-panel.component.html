@@ -213,6 +213,12 @@
                 >
                 <mat-error>Image</mat-error>
             </mat-form-field><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Choose product category</mat-label>
+                <mat-select name = "categoryId" formControlName = "categoryId">
+                  <mat-option *ngFor = "let cat of categoriesData" value= "{{cat.id}}">{{cat.name}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             <!-- <form>
                 <mat-form-field appearance="fill">
                 <mat-label>Category</mat-label>
