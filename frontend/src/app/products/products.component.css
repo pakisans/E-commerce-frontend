@@ -6,7 +6,7 @@
 }
 
 .content {
-    padding: 16px;
+    padding: 15px;
     float: left;
     
 }
@@ -22,6 +22,34 @@ mat-card-title{
 
 mat-card{
     height: 50vh;
-    margin-top: 10vh;
+    margin-top: 10%;
     background-color: rgb(255, 255, 170);
+}
+
+.box{
+	width: 500px;
+	height: 50px;
+	background-color: white;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	padding: 20px;
+    margin-left: 30%;
+    margin-top: 3%;
+    border:2px solid red;
+
+}
+
+.box > i {
+	font-size: 20px;
+	color: #777;
+}
+
+.box > input{
+	flex: 1;
+	height: 40px;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	padding-left: 10px;
 }

@@ -138,6 +138,7 @@ export class AdminPanelComponent implements OnInit {
 
   deleteUser(user : any){
     this.adminService.deleteUser(user.id).subscribe(res=>{alert("User deleted");
+    alert("User deleted successfully");
     this.getAllUsers()
   })
   }
@@ -168,10 +169,18 @@ export class AdminPanelComponent implements OnInit {
     const categoryName = this.formCategory.get('category')?.value;
     const categoryId = this.formCategory.get('idCategory')?.value;
     this.adminService.updateCategory(categoryId, categoryName).subscribe(res => console.log(res));
+    alert("Category updated successfully");
+    let ref = document.getElementById('cancel1')
+    ref?.click();
+    this.formCategory.reset();
+    this.getAllCategories();
+    
   }
 
   onDeleteCategory(category: any) {
     this.adminService.deleteCategory(category.id).subscribe()
+    alert("Category deleted successfully");
+    this.getAllCategories();
   }
 
   updateProduct(){
@@ -184,10 +193,17 @@ export class AdminPanelComponent implements OnInit {
     }
 
     this.adminService.updateProduct(productId, productJson).subscribe(res => console.log(res))
+    alert("Product updated successfully");
+    let ref = document.getElementById('cancel2');
+    ref?.click();
+    this.formProduct.reset();
+    this.getAllProducts();
   }
 
   deleteProduct(product: any) {
     this.adminService.deleteProduct(product.id).subscribe();
+    alert("Product deleted successfully");
+    this.getAllProducts();
   }
 
 }
