@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from './products.service';
 import { Product } from './product.model';
 import { Category } from './category.model';
+import { CartService } from '../cart/cart.service';
 
 
 
@@ -20,7 +21,9 @@ export class ProductsComponent implements OnInit {
   allCategories: Array<any> = [];
   selectedCategoryId: number = 0;
 
-  constructor(private productService: ProductsService) { }
+  productsInCart: Array<any> = [];
+
+  constructor(private productService: ProductsService, private cartService: CartService) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe((data: Product[]) => {
@@ -39,6 +42,8 @@ export class ProductsComponent implements OnInit {
       this.allCategories = res;
     });
     console.log(this.allCategories)
+
+    localStorage.setItem('productsInCart', JSON.stringify(this.productsInCart))
   }
 
   searchProducts() {
@@ -53,6 +58,28 @@ export class ProductsComponent implements OnInit {
         console.log(res)
         this.products = res;
       })
+    }
+  }
+
+  addToCart(product: any) {
+    const index = this.cartService.getProductsInCart().indexOf(product)
+    if(index == -1) {
+      this.cartService.getProductsInCart().push(product);
+    } else {
+      return;
+    }
+  }
+
+  check() {
+    console.log(this.cartService.getProductsInCart())
+  }
+
+  removeFromCart(product: any) {
+    const index = this.cartService.getProductsInCart().indexOf(product)
+    if(index == -1) {
+      return;
+    } else {
+      this.cartService.getProductsInCart().splice(this.cartService.getProductsInCart().indexOf(product), 1);
     }
   }
 

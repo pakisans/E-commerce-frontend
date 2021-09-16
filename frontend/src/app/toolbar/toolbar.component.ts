@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { LoginService } from '../login/login.service';
 
 
 @Component({
@@ -10,13 +13,17 @@ import { MatSidenav } from '@angular/material/sidenav';
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
 
-  constructor() { }
+  isLoggedIn$: Observable<boolean>;
+
+  constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
   }
 
   logout(): void{
     localStorage.removeItem('token');
+    localStorage.removeItem('currentMail');
+    this.router.navigate([''])
   }
 
 }

@@ -18,9 +18,6 @@ export class ProductsService {
     return this.http.get<Product[]>(this.baseUrl + '/getProducts');
 
   }
-  addToCart(payload) {
-    return this.http.post(`${this.cartUrl}`, payload);
-  }
 
   getCategories():Observable<Category[]>{
     return this.http.get<Category[]>('http://localhost:8080/categories/getCategories')
