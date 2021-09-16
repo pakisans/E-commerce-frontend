@@ -198,3 +198,12 @@ ul {
     cursor: pointer;
     vertical-align: top
 }
+.inputAddress{
+    margin-top: 5%;
+}
+
+.inputAddress input{
+    width: 19vw;
+    font-size: 25px;
+}
+
