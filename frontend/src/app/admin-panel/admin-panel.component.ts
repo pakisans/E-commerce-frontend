@@ -162,6 +162,7 @@ export class AdminPanelComponent implements OnInit {
     this.formProduct.controls['description'].setValue(product.description);
     this.formProduct.controls['image'].setValue(product.image);
     this.formProduct.controls['idProduct'].setValue(product.id);
+    this.formProduct.controls['categoryId'].setValue(product.category.id);
   }
 
 
@@ -189,7 +190,9 @@ export class AdminPanelComponent implements OnInit {
       name: this.formProduct.get('name')?.value,
       price: this.formProduct.get('price')?.value,
       description: this.formProduct.get('description')?.value,
-      image: this.formProduct.get('image')?.value
+      image: this.formProduct.get('image')?.value,
+      categoryId: this.formProduct.get('categoryId')?.value
+
     }
 
     this.adminService.updateProduct(productId, productJson).subscribe(res => console.log(res))
