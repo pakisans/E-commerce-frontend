@@ -9,14 +9,14 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { AdminAuthGuard } from './security/admin-auth.guard';
+import { AtuhenticationGuard } from './security/atuhentication.guard';
 
 const routes: Routes = [
   {path : '', component : LoginComponent},
   {path : 'registration', component : RegistrationComponent},
-  {path : 'products', component : ProductsComponent},
-  {path : 'orders', component : OrdersComponent},
-  {path : 'cart', component : CartComponent},
-  {path : 'profile-info', component : ProfileInfoComponent},
+  {path : 'products', component : ProductsComponent, canActivate: [AtuhenticationGuard]},
+  {path : 'orders', component : OrdersComponent, canActivate: [AtuhenticationGuard]},
+  {path : 'cart', component : CartComponent, canActivate: [AtuhenticationGuard]},
   {path : 'admin-panel', component : AdminPanelComponent, canActivate: [AdminAuthGuard]}
 ];
 

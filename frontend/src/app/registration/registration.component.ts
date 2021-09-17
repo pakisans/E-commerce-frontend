@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../login/login.service';
 import { RegistrationService } from './registration.service';
 
 @Component({
@@ -14,10 +15,13 @@ export class RegistrationComponent implements OnInit {
   public registerInvalid = false;
   private formSubmitAttempt = false;
 
+  userExists: boolean = false;
+
 
   constructor( private fb : FormBuilder,
                private router: Router,
-               private registrationService: RegistrationService) {
+               private registrationService: RegistrationService,
+               private loginService: LoginService) {
     this.form = this.fb.group({
     email: ['', Validators.email],
     password: ['', Validators.required],
@@ -50,6 +54,20 @@ export class RegistrationComponent implements OnInit {
        
   }
 
+  }
+
+  checkIfExists() {
+    const email = this.form.get('email')?.value;
+    if(email.length > 0) {
+      this.loginService.getUserByEmail(email).subscribe(res => {
+        if(res == null) {
+          this.userExists = false;
+        }
+        else{
+          this.userExists = true;
+        }
+      })
+    }
   }
 
   
