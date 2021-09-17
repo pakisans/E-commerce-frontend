@@ -8,6 +8,7 @@ import { CartComponent } from './cart/cart.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminAuthGuard } from './security/admin-auth.guard';
 
 const routes: Routes = [
   {path : '', component : LoginComponent},
@@ -16,7 +17,7 @@ const routes: Routes = [
   {path : 'orders', component : OrdersComponent},
   {path : 'cart', component : CartComponent},
   {path : 'profile-info', component : ProfileInfoComponent},
-  {path : 'admin-panel', component : AdminPanelComponent}
+  {path : 'admin-panel', component : AdminPanelComponent, canActivate: [AdminAuthGuard]}
 ];
 
 @NgModule({

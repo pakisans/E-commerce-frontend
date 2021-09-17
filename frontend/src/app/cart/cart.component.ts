@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from './cart.service';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,6 +10,7 @@ export class CartComponent implements OnInit {
 
   cartItems: Array<any> = [];
   totalPrice: number = 0;
+  deliveryAddress = '';
 
   constructor(private cartService: CartService) { }
 
@@ -43,7 +44,11 @@ export class CartComponent implements OnInit {
   }
 
   confirmCart() {
-    console.log("AAAAA")
+
+    const orderObject = {
+      cartItems: this.cartItems,
+      deliveryAddress: this.deliveryAddress
+    }
     
   }
   

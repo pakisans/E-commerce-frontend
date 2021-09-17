@@ -31,8 +31,9 @@ import { OrdersComponent } from './orders/orders.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AuthInterceptor } from './security/auth.interceptor';
 
 
 
@@ -73,7 +74,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [FormBuilder],
+  providers: [FormBuilder, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}],
   bootstrap: [AppComponent],
   schemas:[
     CUSTOM_ELEMENTS_SCHEMA

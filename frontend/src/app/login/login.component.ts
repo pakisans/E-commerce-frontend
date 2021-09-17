@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService
-    // private authService: AuthService
   ) { this.form = this.fb.group({
     email: ['', Validators.email],
     password: ['', Validators.required]
@@ -47,23 +46,15 @@ export class LoginComponent implements OnInit {
           let any = JSON.stringify(jwt_decode(res.token));
           let mail = JSON.parse(any).sub;
           localStorage.setItem('currentMail', mail)
+
+          this.loginService.isUserLoggedIn.next(true);
+
+          this.loginService.getUserByEmail(localStorage.getItem('currentMail')).subscribe(res => {
+            this.loginService.setCurrentUser(res);
+          })
+
           this.router.navigate(['/products'])
         });
-
-        // var data:FormData = new FormData();
-        // data.append("username", email);
-        // data.append("password",password);
-        // data.append("client_secret","client_secret");
-        // data.append("client_id","client_id");
-        // data.append("grant_type","password");
-        // this.oauth.login(data).subscribe((response: any) => {
-
-        //   localStorage.setItem('token', response.access_token);
-        //   // localStorage.setItem('currentUser', data);
-        // })
-
-
-
 
        
     }

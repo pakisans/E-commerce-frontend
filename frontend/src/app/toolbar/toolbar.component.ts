@@ -13,9 +13,13 @@ import { LoginService } from '../login/login.service';
 export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
 
-  isLoggedIn$: Observable<boolean>;
+  isLoggedIn: boolean;
 
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { 
+    loginService.isUserLoggedIn.subscribe(res => {
+      this.isLoggedIn = res;
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -23,7 +27,10 @@ export class ToolbarComponent implements OnInit {
   logout(): void{
     localStorage.removeItem('token');
     localStorage.removeItem('currentMail');
+    this.loginService.setCurrentUser(null);
+    this.loginService.isUserLoggedIn.next(false);
     this.router.navigate([''])
   }
+
 
 }
