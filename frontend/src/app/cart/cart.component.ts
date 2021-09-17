@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart/cart.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,7 +13,7 @@ export class CartComponent implements OnInit {
   totalPrice: number = 0;
   deliveryAddress = '';
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private loginService: LoginService) { }
 
   ngOnInit(): void {
     for(let p of this.cartService.getProductsInCart()) {
@@ -46,9 +47,16 @@ export class CartComponent implements OnInit {
   confirmCart() {
 
     const orderObject = {
-      cartItems: this.cartItems,
-      deliveryAddress: this.deliveryAddress
+      items: this.cartItems,
+      address: this.deliveryAddress,
+      userId: this.loginService.getCurrentUser().id,
+      price: this.totalPrice
     }
+
+    this.cartService.saveOrder(orderObject).subscribe(res => {
+      console.log(res);
+      alert(JSON.stringify(res))
+    })
     
   }
   

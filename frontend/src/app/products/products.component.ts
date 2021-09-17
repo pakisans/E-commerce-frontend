@@ -71,6 +71,7 @@ export class ProductsComponent implements OnInit {
 
   check() {
     console.log(this.cartService.getProductsInCart())
+    this.cartService.getOrders().subscribe(res => console.log(res))
   }
 
   removeFromCart(product: any) {
