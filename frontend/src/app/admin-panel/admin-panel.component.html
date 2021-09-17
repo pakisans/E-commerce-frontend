@@ -48,9 +48,9 @@
                     <mat-card-title style="text-align: center;">Admin panel</mat-card-title>
                     <mat-card-title>New user</mat-card-title>
                     <mat-form-field class="account-form">
-                        <input matInput type="text" name="email" placeholder="Email" formControlName="email">
+                        <input matInput (input)="checkIfExists()" type="text" name="email" placeholder="Email" formControlName="email">
                         <mat-error>Email</mat-error>
-                        <!-- <label style="color: red;">Email already exists</label> -->
+                        <label *ngIf="userExists" style="color: red;">Email already exists</label>
                     </mat-form-field><br>
                     <mat-form-field class="account-form">
                         <input matInput type="firstName" name="firstName" placeholder="Firstname" formControlName="firstName">
@@ -74,7 +74,7 @@
                       </mat-form-field>
     
                     </mat-card>
-                    <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add new user</button>  
+                    <button mat-raised-button type="submit" [disabled]="userExists" class="btn btn-danger pull-right">Add new user</button>  
             </form>      
         </div>
         <div class="modal-footer">

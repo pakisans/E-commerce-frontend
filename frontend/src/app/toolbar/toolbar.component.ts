@@ -14,10 +14,14 @@ export class ToolbarComponent implements OnInit {
   @Input() inputSideNav: MatSidenav;
 
   isLoggedIn: boolean;
+  isAdmin: boolean;
 
   constructor(private router: Router, private loginService: LoginService) { 
     loginService.isUserLoggedIn.subscribe(res => {
       this.isLoggedIn = res;
+    })
+    loginService.isUserAdmin.subscribe(res => {
+      this.isAdmin = res;
     })
   }
 

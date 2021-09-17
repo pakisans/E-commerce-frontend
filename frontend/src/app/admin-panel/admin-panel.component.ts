@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AdminService } from './admin.service';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -17,11 +18,12 @@ export class AdminPanelComponent implements OnInit {
   usersData !: any;
   showAdd !: boolean;
   showUpdate !: boolean;
+  userExists = false;
 
   roles: string[] = ['ADMIN', 'USER'];
   selectedRole = '';
 
-  constructor(private formBuilder: FormBuilder, private adminService: AdminService) {
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService,private loginService: LoginService) {
 
     this.formCategory = formBuilder.group({
       category : ['', Validators.required],
@@ -137,8 +139,7 @@ export class AdminPanelComponent implements OnInit {
   }
 
   deleteUser(user : any){
-    this.adminService.deleteUser(user.id).subscribe(res=>{alert("User deleted");
-    alert("User deleted successfully");
+    this.adminService.deleteUser(user.id).subscribe(res=>{alert("User deleted successfully");
     this.getAllUsers()
   })
   }
@@ -209,4 +210,17 @@ export class AdminPanelComponent implements OnInit {
     this.getAllProducts();
   }
 
+  checkIfExists() {
+    const email = this.formUser.get('email')?.value;
+    if(email.length > 0) {
+      this.loginService.getUserByEmail(email).subscribe(res => {
+        if(res == null) {
+          this.userExists = false;
+        }
+        else{
+          this.userExists = true;
+        }
+      })
+    }
+  }
 }

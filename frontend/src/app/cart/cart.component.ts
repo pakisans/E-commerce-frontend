@@ -55,7 +55,12 @@ export class CartComponent implements OnInit {
 
     this.cartService.saveOrder(orderObject).subscribe(res => {
       console.log(res);
-      alert(JSON.stringify(res))
+      alert("Successful shopping")
+      this.cartService.setCartItems();
+      this.cartItems = this.cartService.getCartItems();
+      this.totalPrice = 0;
+      this.deliveryAddress = "";
+      
     })
     
   }

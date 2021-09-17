@@ -51,7 +51,7 @@
                              <button type="button" 
                              (click) = "clearCart()" class="button cart_button_clear">Clear cart</button>
 
-                            <button type="button" [disabled] = "cartItems.length == 0"
+                            <button type="button" [disabled] = "cartItems.length == 0 || deliveryAddress.length == 0"
                             (click) = "confirmCart()" class="button cart_button_checkout">Payment</button> 
                         </div>
                     </div>

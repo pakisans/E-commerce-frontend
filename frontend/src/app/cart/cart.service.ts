@@ -17,6 +17,10 @@ export class CartService {
     return this.cartItems;
   }
 
+  setCartItems(){
+    this.cartItems = [];
+  }
+
   saveOrder(order: any) {
     return this.httpClient.post('http://localhost:8080/orders/addOrder', order)
   }

@@ -21,6 +21,9 @@ export class AuthInterceptor implements HttpInterceptor {
     if(request.url.includes('http://localhost:8080/users/getByEmail')) {
       return httpHandler.handle(request);
     }
+    if(request.url.includes('http://localhost:8080/users/register')) {
+      return httpHandler.handle(request);
+    }
     const token = localStorage.getItem('token');
     const requestClone = request.clone({setHeaders: {
       Authorization: 'Bearer ' + token
