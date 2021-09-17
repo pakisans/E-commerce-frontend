@@ -45,6 +45,15 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.token);
           let any = JSON.stringify(jwt_decode(res.token));
           let mail = JSON.parse(any).sub;
+
+          console.log(JSON.parse(any))
+
+          const role = JSON.parse(any).Authorities[0];
+          
+          if(role == "ADMIN") {
+            this.loginService.isUserAdmin.next(true);
+          }
+
           localStorage.setItem('currentMail', mail)
 
           this.loginService.isUserLoggedIn.next(true);

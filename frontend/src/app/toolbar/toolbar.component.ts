@@ -29,6 +29,7 @@ export class ToolbarComponent implements OnInit {
     localStorage.removeItem('currentMail');
     this.loginService.setCurrentUser(null);
     this.loginService.isUserLoggedIn.next(false);
+    this.loginService.isUserAdmin.next(false);
     this.router.navigate([''])
   }
 

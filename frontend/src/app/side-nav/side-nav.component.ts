@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -7,7 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor() { }
+  isLoggedIn: boolean;
+  isAdmin: boolean;
+
+  constructor(private loginService: LoginService) {
+
+    loginService.isUserLoggedIn.subscribe(res => {
+      this.isLoggedIn = res;
+    })
+
+    loginService.isUserAdmin.subscribe(res => {
+      this.isAdmin = res;
+    })
+
+   }
 
   ngOnInit(): void {
   }

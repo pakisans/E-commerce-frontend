@@ -69,11 +69,6 @@ export class ProductsComponent implements OnInit {
     }
   }
 
-  check() {
-    console.log(this.cartService.getProductsInCart())
-    this.cartService.getOrders().subscribe(res => console.log(res))
-  }
-
   removeFromCart(product: any) {
     const index = this.cartService.getProductsInCart().indexOf(product)
     if(index == -1) {
@@ -82,42 +77,5 @@ export class ProductsComponent implements OnInit {
       this.cartService.getProductsInCart().splice(this.cartService.getProductsInCart().indexOf(product), 1);
     }
   }
-
-  // handleSuccessfulResponse(response) {
-
-  //   this.productsForCart = new Array<Product>();
-  //   this.productsRecived = response;
-  //   for (const product of this.productsRecived) {
-
-  //     const productwithRetrievedImageField = new Product();
-  //     productwithRetrievedImageField.id = product.id;
-  //     productwithRetrievedImageField.name = product.name;
-  //     productwithRetrievedImageField.price = product.price;
-  //     productwithRetrievedImageField.description = product.description;
-  //     productwithRetrievedImageField.image = 'data:image/jpeg;base64,';
-  //     this.productsForCart.push(productwithRetrievedImageField);
-  //   }
-  // }
-
-  // addToCart(productId) {
-  //   let product = this.productsForCart.find(product => {
-  //     return product.id === +productId;
-  //   });
-
-  //   let cartData = [];
-  //   let data = localStorage.getItem('cart');
-
-  //   if (data !== null) {
-  //     cartData = JSON.parse(data);
-  //   }
-  //   cartData.push(product);
-  //   this.updateCartData(cartData);
-  //   localStorage.setItem('cart', JSON.stringify(cartData));
-  //   product.isAdded = true;
-  // }
-
-  // updateCartData(cartData) {
-  //   this.cartProducts = cartData;
-  // }
 
 }

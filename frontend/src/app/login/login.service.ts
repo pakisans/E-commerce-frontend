@@ -12,7 +12,9 @@ export class LoginService {
 
   private currentUser: any;
 
-  public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isUserLoggedIn: BehaviorSubject<boolean> = 
+        new BehaviorSubject<boolean>(localStorage.getItem('token') != null);
+  public isUserAdmin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) { }
 
